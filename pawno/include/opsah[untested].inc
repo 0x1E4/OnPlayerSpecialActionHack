@@ -33,25 +33,38 @@ PUB->OnPlayerSpawn(playerid)
 
 PUB->OnPlayerUpdate(playerid)
 {
-    //begin the anticheat
-    if(IsPlayerSpecialAction(playerid) && !Bit_Get(ac_SafetyToUse, playerid))
-    {
-        CallLocalFunction("OnPlayerSpecialActionHack", "i", playerid);
-     }
+	//begin the anticheat
+	if(IsPlayerUseSpecialAction(playerid) && !Bit_Get(ac_SafetyToUse, playerid))
+	{
+		CallLocalFunction("OnPlayerSpecialActionHack", "i", playerid);
+	}
  }
  
- STR->IsPlayerSpecialAction(playerid)
+ str->Pre_SetPlayerSpecialAction(playerid, actionid)
  {
-       static bool:bole;
+       Bit_Set(ac_SafetyToUse, playerid, true);
+       return SetPlayerSpecialAction(playerid, actionid);
+ }
+ 
+ #if defined _ALS_SetPlayerSpecialAction
+	#undef SetPlayerSpecialAction
+#else
+	#define _ALS_SetPlayerSpecialAction
+#endif
+
+#define SetPlayerSpecialAction pre_SetPlayerSpecialAction
+ 
+ STR->IsPlayerUseSpecialAction(playerid)
+ {
        if(GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USEJETPACK || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DANCE1 || 
        GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DANCE2 || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DANCE3 || 
        GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DANCE4 ||GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_HANDSUP || 
        GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USECELLPHONE || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_STOPUSECELLPHONE || 
        GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DRINKBEER || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_SMOKE_CIGGY || 
        GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DRINK_WHINE || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DRINK_SPRUNK ||
-       GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_CUFFED || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_PISSING) return boole = true;
-       if(GetPlayerSpecialction(playerid) == SPECIAL_ACTION_NONE) boole = false;
-       return boole;
+       GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_CUFFED || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_PISSING) return 1;
+       //if(GetPlayerSpecialction(playerid) == SPECIAL_ACTION_NONE) return 0;
+       return 0;
 }
        
        
