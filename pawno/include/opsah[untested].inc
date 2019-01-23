@@ -40,7 +40,7 @@ PUB->OnPlayerUpdate(playerid)
 	}
  }
  
- str->Pre_SetPlayerSpecialAction(playerid, actionid)
+ STR->Pre_SetPlayerSpecialAction(playerid, actionid)
  {
        Bit_Set(ac_SafetyToUse, playerid, true);
        return SetPlayerSpecialAction(playerid, actionid);
