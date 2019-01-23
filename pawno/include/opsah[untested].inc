@@ -11,9 +11,9 @@ static
 
 PUB->OnPlayerSpawn(playerid)
 {
-    Bit_Set(ac_SafetyToUse, playerid, false);
+    	Bit_Set(ac_SafetyToUse, playerid, false);
     
-#if defined pre_OnPlayerSpawn
+	#if defined pre_OnPlayerSpawn
 		pre_OnPlayerSpawn(playerid);
 	#endif
 	return true;
@@ -38,7 +38,23 @@ PUB->OnPlayerUpdate(playerid)
 	{
 		CallLocalFunction("OnPlayerSpecialActionHack", "i", playerid);
 	}
- }
+	#if defined pre_OnPlayerUpdate
+		pre_OnPlayerUpdate(playerid);
+	#endif
+	return true;
+}
+
+#if defined _ALS_OnPlayerUpdate
+    #undef OnPlayerUpdate
+#else
+    #define _ALS_OnPlayerUpdate
+#endif
+
+#define OnPlayerUpdate pre_OnPlayerUpdate
+
+#if defined pre_OnPlayerUpdate
+    forward pre_OnPlayerUpdate(playerid);
+#endif
  
  STR->Pre_SetPlayerSpecialAction(playerid, actionid)
  {
