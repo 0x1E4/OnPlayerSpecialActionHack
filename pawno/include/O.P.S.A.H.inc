@@ -75,7 +75,7 @@ PUB->OnPlayerUpdate(playerid)
        switch(GetPlayerSpecialAction(playerid))
        {
 	      case 1.. 8, 10, 11, 13, 20..25, 68: 
-	      	  return 1
+	      	  return 1;
 	}
         return 0;
 }
