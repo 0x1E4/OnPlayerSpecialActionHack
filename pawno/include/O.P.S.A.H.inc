@@ -72,15 +72,12 @@ PUB->OnPlayerUpdate(playerid)
  
  STR->IsPlayerUseSpecialAction(playerid)
  {
-       if(GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USEJETPACK || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DANCE1 || 
-       GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DANCE2 || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DANCE3 || 
-       GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DANCE4 ||GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_HANDSUP || 
-       GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USECELLPHONE || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_STOPUSECELLPHONE || 
-       GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DRINKBEER || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_SMOKE_CIGGY || 
-       GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DRINK_WHINE || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_DRINK_SPRUNK ||
-       GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_CUFFED || GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_PISSING) return 1;
-       //if(GetPlayerSpecialction(playerid) == SPECIAL_ACTION_NONE) return 0;
-       return 0;
+       switch(GetPlayerSpecialAction(playerid))
+       {
+	      case 1.. 8, 10, 11, 13, 20..25, 68: 
+	      	  return 1
+	}
+        return 0;
 }
        
        
